@@ -1,0 +1,12 @@
+.navbar > a > img{
+    max-height: 5rem;
+    padding-right: 1rem;
+}
+
+.logoFooter > img{
+    max-height: 3rem;
+}
+.footer a{
+    text-decoration: none;
+    background-color: #B0413E;
+}
