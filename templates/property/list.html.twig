@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ImmoJB | Home{% endblock %}
+
+{% block body %}
+    <h1>List of our properties</h1>
+
+    <div class="property-list">
+        {% for property in properties %}
+            <a href="{{ path('property_detail', {'id' : property.id}) }}" title="View property's details">
+                <div class="property-list-item">
+                    <img class="property-list-img" src="{{ asset('img/properties/' ~ property.img) }}"
+                         alt="{{ property.type }}">
+                    <div class="property-list-content">
+                        <h5 class="listTitle">{{ property.type|capitalize }} // {{ property.surface }}m²</h5>
+                        <p class="listDetails">Type : {{ property.saleOrRent }}<br>
+                        {% if property.saleOrRent == 'rent' %}
+                            Price : {{ property.price }}€/month<br>
+                        {% elseif property.saleOrRent == 'sale' %}
+                          Price : {{ property.price }}€<br>
+                        {% endif %}
+                            Address : {{ property.address }}
+                    </div>
+                </div>
+            </a>
+        {% else %}
+            <div>There are no properties in sell yet !</div>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+

@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ImmoJB | Team{% endblock %}
+{% block body %}
+    <h1>Our team</h1>
+
+    <div class="card mb-3" style="max-width: 540px;">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img class=img-fluid card-img-left" src="{{ asset('img/team/jb.jpg') }}">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">Jean-Baptiste GINGUENE</h5>
+                    <p class="card-text">Hello, I'm JB, I'm just a scammer. I'd love to meet your. Fee free to contact me</p>
+                    <p class="card-text"><small class="text-muted">Contact me</small></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mb-3" style="max-width: 540px;">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <a href="{{ path('main_pervalert') }}">
+                <img class=img-fluid card-img-left" src="{{ asset('img/team/petunia.jpg') }}">
+                </a>
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">Pétunia VIGNON</h5>
+                    <p class="card-text">Hello, I'm Petunia, I'd just like to chat with u. I would love to send some nudes. Click and you'll see if I wear any clothes <3</p>
+                    <p class="card-text"><small class="text-muted">Contact me</small></p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

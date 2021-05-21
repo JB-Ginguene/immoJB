@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} ImmoJB | details | {{ property.type }}{% endblock %}
+
+{% block body %}
+
+    <div class="property-details">
+        <div class="property-img">
+            <img src="{{ asset('img/properties/' ~ property.img ) }}" alt="{{ property.type }}">
+        </div>
+        <div class="property-details-infos">
+            <h2>{{ property.type }}</h2>
+
+        </div>
+
+    </div>
+
+{% endblock %}

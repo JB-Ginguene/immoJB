@@ -9,12 +9,27 @@ use Symfony\Component\Routing\Annotation\Route;
 class MainController extends AbstractController
 {
     /**
-     * @Route("/", name="main_home")
+     * @Route("/team", name="main_team")
      */
-    public function home(): Response
+    public function team(): Response
     {
-        return $this->render('main/index.html.twig', [
-            'controller_name' => 'MainController',
-        ]);
+        return $this->render('main/team.html.twig');
     }
+
+    /**
+     * @Route("/contact", name="main_contact")
+     */
+    public function contact(): Response
+    {
+        return $this->render('main/contact.html.twig');
+    }
+
+    /**
+     * @Route("/pervalert", name="main_pervalert")
+     */
+    public function perv(): Response
+    {
+        return $this->render('main/pervalert.html.twig');
+    }
+
 }
