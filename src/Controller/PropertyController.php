@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\ClassResearch\Research;
 use App\Entity\Property;
 use App\Form\PropertyType;
 use App\Form\ResearchType;
@@ -19,19 +20,24 @@ class PropertyController extends AbstractController
      */
     public function home(Request $request, EntityManagerInterface $entityManager, PropertyRepository $propertyRepository): Response
     {
-        $research = new \Research();
+        $research = new \App\Own\Research();
         $researchForm = $this->createForm(ResearchType::class, $research);
 
         $researchForm->handleRequest($request);
 
         if ($researchForm->isSubmitted() && $researchForm->isValid()) {
-           dd($research);
+            $properties = $propertyRepository->findByPersonnalResearch($research);
+            return $this->render('property/list.html.twig', [
+                'researchForm' => $researchForm->createView(),
+                'properties' => $properties
+            ]);
+        } else{
+            $properties = $propertyRepository->findAllOrderByDate();
+            return $this->render('property/list.html.twig', [
+                'researchForm' => $researchForm->createView(),
+                'properties' => $properties
+            ]);
         }
-        $properties = $propertyRepository->findAllOrderByDate();
-        return $this->render('property/list.html.twig', [
-            'researchForm' => $researchForm->createView(),
-            'properties' => $properties
-        ]);
     }
 
     /**

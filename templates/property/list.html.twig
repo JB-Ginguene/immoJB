@@ -5,15 +5,84 @@
 {% block body %}
     <h1>List of our properties</h1>
 
-    <div class="container col-lg-10 col-md-10 col-sm-10 col-xs-12 justify-content-center bg-light mt-2 mb-2">
-
+    <div class="container col-lg-12 col-md-10 col-sm-12 col-xs-12 justify-content-between bg-light mt-2 mb-2">
         {{ form_start(researchForm) }}
-        {{ form_widget(researchForm) }}
-        <div class="col text-center">
-            <button type="submit" class="justify-content-center btn btn-dark font-weight-bold">Search</button>
+        <div class="row">
+            <div class="col m-1">
+                <div class="row justify-content-between">
+                    <div class="">{{ form_label(researchForm.saleOrRent) }}</div>
+                    <div class="alert-danger">{{ form_errors(researchForm.saleOrRent) }}</div>
+                    <div class="">{{ form_widget(researchForm.saleOrRent) }}</div>
+                </div>
+
+                <div class="row justify-content-between">
+                    <div class="">{{ form_label(researchForm.priceMin) }}</div>
+                    <div class="alert-danger">{{ form_errors(researchForm.priceMin) }}</div>
+                    <div class="">{{ form_widget(researchForm.priceMin) }}</div>
+                </div>
+                <div class="row justify-content-between">
+                    <div class="">{{ form_label(researchForm.priceMax) }}</div>
+                    <div class="alert-danger">{{ form_errors(researchForm.priceMax) }}</div>
+                    <div class="">{{ form_widget(researchForm.priceMax) }}</div>
+                </div>
+            </div>
+            <div class="col m-1">
+                <div class="row justify-content-between">
+                    <div class="">{{ form_label(researchForm.type) }}</div>
+                    <div class="alert-danger">{{ form_errors(researchForm.type) }}</div>
+                    <div class="">{{ form_widget(researchForm.type) }}</div>
+                </div>
+                <div class="row justify-content-between">
+                    <div class="">{{ form_label(researchForm.surfaceMin) }}</div>
+                    <div class="alert-danger">{{ form_errors(researchForm.surfaceMin) }}</div>
+                    <div class="">{{ form_widget(researchForm.surfaceMin) }}</div>
+                </div>
+                <div class="row justify-content-between">
+                    <div class="">{{ form_label(researchForm.surfaceMax) }}</div>
+                    <div class="alert-danger">{{ form_errors(researchForm.surfaceMax) }}</div>
+                    <div class="">{{ form_widget(researchForm.surfaceMax) }}</div>
+                </div>
+            </div>
+            <div class="col m-1">
+                <div class="row justify-content-between">
+                    <div class="">{{ form_label(researchForm.roomMin) }}</div>
+                    <div class="alert-danger">{{ form_errors(researchForm.roomMin) }}</div>
+                    <div class="">{{ form_widget(researchForm.roomMin) }}</div>
+                </div>
+                <div class="row justify-content-between">
+                    <div class="">{{ form_label(researchForm.roomMax) }}</div>
+                    <div class="alert-danger">{{ form_errors(researchForm.roomMax) }}</div>
+                    <div class="">{{ form_widget(researchForm.roomMax) }}</div>
+                </div>
+                <div class="row justify-content-between">
+                    <div class="">{{ form_label(researchForm.address) }}</div>
+                    <div class="alert-danger">{{ form_errors(researchForm.address) }}</div>
+                    <div class="">{{ form_widget(researchForm.address) }}</div>
+                </div>
+            </div>
+            <div class="col m-1">
+                <div class="row justify-content-between">
+                    <div class="">{{ form_label(researchForm.specificities) }}</div>
+                    <div class="alert-danger">{{ form_errors(researchForm.specificities) }}</div>
+                    <div class="">{{ form_widget(researchForm.specificities) }}</div>
+                </div>
+                <div class="row justify-content-between">
+                    <div class="">{{ form_label(researchForm.outsideSurfaceMin) }}</div>
+                    <div class="alert-danger">{{ form_errors(researchForm.outsideSurfaceMin) }}</div>
+                    <div class="">{{ form_widget(researchForm.outsideSurfaceMin) }}</div>
+                </div>
+                <div class="row justify-content-between">
+                    <div class="">{{ form_label(researchForm.outsideSurfaceMax) }}</div>
+                    <div class="alert-danger">{{ form_errors(researchForm.outsideSurfaceMax) }}</div>
+                    <div class="">{{ form_widget(researchForm.outsideSurfaceMax) }}</div>
+                </div>
+            </div>
         </div>
-        {{ form_end(researchForm) }}
     </div>
+    <div class="col text-center">
+        <button type="submit" class="justify-content-center btn btn-dark font-weight-bold">Search</button>
+    </div>
+    {{ form_end(researchForm) }}
 
     <div class="property-list">
         {% for property in properties %}

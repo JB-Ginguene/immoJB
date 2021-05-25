@@ -1,5 +1,8 @@
 <?php
 
+namespace App\Own;
+
+
 use Doctrine\ORM\Mapping as ORM;
 
 /**

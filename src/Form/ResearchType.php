@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\Property;
+use App\Own\Research;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -78,6 +78,7 @@ class ResearchType extends AbstractType
 //            ADRRESS : search by location
             ->add('address', TextType::class, [
                 'required' => false,
+                'label' => 'City',
                 'row_attr' => ['class' => 'form-space-between'],
                 'label_attr' => ['class' => 'font-weight-bold']
             ])
@@ -105,8 +106,7 @@ class ResearchType extends AbstractType
                 'required' => false,
                 'row_attr' => ['class' => 'form-space-between'],
                 'label_attr' => ['class' => 'font-weight-bold']
-            ])
-;
+            ]);
 ////            WHEN WAS IT PUBLISHED?
 //            ->add('publishedDate', DateType::class, [
 //                'required' => false,
@@ -124,7 +124,7 @@ class ResearchType extends AbstractType
     {
         $resolver->setDefaults([
 //            TODO Associer la classe Research :
-            'data_class' => \Research::class,
+            'data_class' => Research::class,
         ]);
     }
 }
