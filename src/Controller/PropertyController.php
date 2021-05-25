@@ -3,9 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Property;
+use App\Form\PropertyType;
+use App\Form\ResearchType;
 use App\Repository\PropertyRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -14,31 +17,20 @@ class PropertyController extends AbstractController
     /**
      * @Route("/", name="home")
      */
-    public function home(EntityManagerInterface $entityManager, PropertyRepository $propertyRepository): Response
+    public function home(Request $request, EntityManagerInterface $entityManager, PropertyRepository $propertyRepository): Response
     {
-        // test création d'une nouvelle propriete :
-        $newProperty = new Property();
-        $newProperty->setAddress('8, rue du Quinquont, 26000 Valence')
-        ->setGarage(false)
-        ->setOutsides(false)
-        ->setPool(false)
-        ->setType('house')
-        ->setSurface(80)
-        ->setSaleOrRent('rent')
-        ->setPrice(900)
-        ->setRoom(5)
-        ->setPublishedDate(new \DateTime())
-        ->setImg('apartment_1.jpg');
+        $research = new \Research();
+        $researchForm = $this->createForm(ResearchType::class, $research);
 
-        // $entityManager->persist($newProperty);
-        // $entityManager->flush();
+        $researchForm->handleRequest($request);
 
-        ///////////////////////////////
-        ///
-        $properties = $propertyRepository->findAll();
-
+        if ($researchForm->isSubmitted() && $researchForm->isValid()) {
+           dd($research);
+        }
+        $properties = $propertyRepository->findAllOrderByDate();
         return $this->render('property/list.html.twig', [
-            'properties' => $properties,
+            'researchForm' => $researchForm->createView(),
+            'properties' => $properties
         ]);
     }
 
@@ -48,7 +40,6 @@ class PropertyController extends AbstractController
     public
     function detail($id, PropertyRepository $propertyRepository): Response
     {
-        //TODO récupérer la série en fonction de son id
         $property = $propertyRepository->find($id);
 
         if (!$property) {
@@ -64,9 +55,24 @@ class PropertyController extends AbstractController
      * @Route("/property/create", name="property_create")
      */
     public
-    function create(): Response
+    function create(Request $request, EntityManagerInterface $entityManager): Response
     {
+        $property = new Property();
+        $propertyForm = $this->createForm(PropertyType::class, $property);
+        $property->setPublishedDate(new \DateTime())
+            ->setImg('house_3.jpg'); // a défaut de mettre une img personnalisée, je mets celle-ci
+
+        $propertyForm->handleRequest($request);
+
+        if ($propertyForm->isSubmitted() && $propertyForm->isValid()) {
+            $entityManager->persist($property);
+            $entityManager->flush();
+            //message flash :
+            $this->addFlash('success', 'Congrats, your property has been added');
+            return $this->redirectToRoute('property_detail', ['id' => $property->getId()]);
+        }
         return $this->render('property/create.html.twig', [
+            'createPropertyForm' => $propertyForm->createView()
         ]);
     }
 }

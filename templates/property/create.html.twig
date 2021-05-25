@@ -5,5 +5,13 @@
 {% block body %}
 
     <h1>Add your own property to our roster</h1>
+    <div class="container col-lg-6 col-md-8 col-sm-10 col-xs-12 justify-content-center bg-light mt-4 mb-2">
+        {{ form_start(createPropertyForm) }}
+        {{ form_widget(createPropertyForm) }}
+        <div class="col text-center">
+            <button class="justify-content-center btn btn-dark font-weight-bold">Adding your property</button>
+        </div>
+        {{ form_end(createPropertyForm) }}
+    </div>
 
 {% endblock %}

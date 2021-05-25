@@ -20,7 +20,7 @@
 }
 
 .property-list-item {
-    background-color: #dbdbdb;
+    background-color: #f5f5f5;
     border-radius: 5px;
     margin: 5px;
     padding: 2px 10px;
@@ -32,6 +32,28 @@
     max-width: 15rem;
 }
 
-.property-list-content > p{
-text-align: justify;
+.property-list-content > p {
+    text-align: justify;
+}
+
+.formRadio {
+    display: flex;
+    justify-content: space-between;
+}
+
+.imgDetail img{
+    max-height: 20rem;
+}
+
+.radioChoices  input{
+margin-left: 10px;
+}
+
+.form-space-between{
+    display: flex;
+    justify-content: space-between;
+}
+
+a:link{
+    text-decoration: none;
 }

@@ -5,6 +5,16 @@
 {% block body %}
     <h1>List of our properties</h1>
 
+    <div class="container col-lg-10 col-md-10 col-sm-10 col-xs-12 justify-content-center bg-light mt-2 mb-2">
+
+        {{ form_start(researchForm) }}
+        {{ form_widget(researchForm) }}
+        <div class="col text-center">
+            <button type="submit" class="justify-content-center btn btn-dark font-weight-bold">Search</button>
+        </div>
+        {{ form_end(researchForm) }}
+    </div>
+
     <div class="property-list">
         {% for property in properties %}
             <a href="{{ path('property_detail', {'id' : property.id}) }}" title="View property's details">
@@ -14,11 +24,11 @@
                     <div class="property-list-content">
                         <h5 class="listTitle">{{ property.type|capitalize }} // {{ property.surface }}m²</h5>
                         <p class="listDetails">Type : {{ property.saleOrRent }}<br>
-                        {% if property.saleOrRent == 'rent' %}
-                            Price : {{ property.price }}€/month<br>
-                        {% elseif property.saleOrRent == 'sale' %}
-                          Price : {{ property.price }}€<br>
-                        {% endif %}
+                            {% if property.saleOrRent == 'rent' %}
+                                Price : {{ property.price }}€/month<br>
+                            {% elseif property.saleOrRent == 'sale' %}
+                                Price : {{ property.price }}€<br>
+                            {% endif %}
                             Address : {{ property.address }}
                     </div>
                 </div>

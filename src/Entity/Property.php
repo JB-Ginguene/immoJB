@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\PropertyRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=PropertyRepository::class)
@@ -18,46 +19,80 @@ class Property
     private $id;
 
     /**
+     * @Assert\Range(
+     *     min="10",
+     *     max="1000",
+     *     minMessage="It's illegal to sell or rent a place with less than 10m².",
+     *     maxMessage="You must be really rich, please contact us directly, we'll find an agreement.")
+     *
      * @ORM\Column(type="integer")
      */
     private $surface;
 
     /**
+     *     @Assert\Range(
+     *     min="1",
+     *     max="100",
+     *     minMessage="You need at least a room.",
+     *     maxMessage="You must be really rich, please contact us directly, we'll find an agreement.")
+     *
      * @ORM\Column(type="integer")
      */
     private $room;
 
     /**
+     * @Assert\Choice(choices={"house", "apartment", "other"})
+     *
      * @ORM\Column(type="string", length=30)
      */
     private $type;
 
     /**
+     *     @Assert\Length(
+     *     min=10,
+     *     max=3000,
+     *     minMessage="Minimum 10 charaters please !",
+     *     maxMessage="Maximum 255 charaters please !"
+     * )
      * @ORM\Column(type="string", length=255)
      */
     private $address;
 
     /**
+     * @Assert\Type("bool")
+     *
      * @ORM\Column(type="boolean")
      */
     private $pool;
 
     /**
+     * @Assert\Type("bool")
+     *
      * @ORM\Column(type="boolean")
      */
     private $outsides;
 
     /**
+     *     @Assert\Range(
+     *     min="1",
+     *     max="10000",
+     *     minMessage="You need at least 1m².",
+     *     maxMessage="You must be really rich, please contact us directly, we'll find an agreement.")
+
      * @ORM\Column(type="integer", nullable=true)
      */
     private $outsideSurface;
 
     /**
+     * @Assert\Type("bool")
+     *
      * @ORM\Column(type="boolean")
      */
     private $garage;
 
     /**
+     * @Assert\Choice(choices={"sale", "rent"})
+     *
      * @ORM\Column(type="string", length=255)
      */
     private $saleOrRent;

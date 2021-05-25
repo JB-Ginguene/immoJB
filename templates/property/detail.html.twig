@@ -4,15 +4,43 @@
 
 {% block body %}
 
-    <div class="property-details">
-        <div class="property-img">
+    <div class="container col-lg-8 col-md-8 col-sm-10 col-xs-12 d-flex justify-content-between bg-light mt-4 mb-2 pt-2 pb-2 align-self-center">
+        <div class="container imgDetail">
             <img src="{{ asset('img/properties/' ~ property.img ) }}" alt="{{ property.type }}">
         </div>
-        <div class="property-details-infos">
-            <h2>{{ property.type }}</h2>
+        <div class="container">
+            {% if property.saleOrRent == 'rent' %}
+                <h2>RENT - {{ property.type|capitalize }}</h2>
+            {% elseif property.saleOrRent == 'sale' %}
+                <h2>SALE - {{ property.type|capitalize }}</h2>
+            {% endif %}
+            <p>
+                {% if property.saleOrRent == 'rent' %}
+                    Price : {{ property.price|format_currency('EUR') }}€/month<br>
+                {% elseif property.saleOrRent == 'sale' %}
+                    Price : {{ property.price }}€<br>
+                {% endif %}
+                Surface : {{ property.surface }}<br>
+                Room : {{ property.room }}<br>
+                Outsides : {{ property.outsides ? 'Yes':'No' }}<br>
+                {% if property.outsides %}
+                    Outsides' surface : {{ property.outsideSurface }}m²<br>
+                {% endif %}
+                Pool : {{ property.pool  ? 'Yes':'No' }}<br>
+                Garage : {{ property.garage  ? 'Yes':'No' }}<br>
+            </p>
+            <h6 id="addressHide">See the address</h6>
 
         </div>
-
     </div>
 
+{% endblock %}
+
+{% block script %}
+    <script>
+        document.getElementById('addressHide').onclick = function changeContent() {
+            document.getElementById('addressHide').textContent = "{{ property.address }}";
+        }
+
+    </script>
 {% endblock %}
